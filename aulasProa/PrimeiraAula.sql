@@ -55,3 +55,7 @@ create database if not exists db_equippe2;
 */
 
 drop database if exists db_equippe2;
+
+use nomeDoBanco #usar o nome do banco de dados
+
+select database() # traz o banco de dados em uso atualmente
