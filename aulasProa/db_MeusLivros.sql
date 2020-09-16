@@ -14,7 +14,7 @@ create table if not exists tbl_livro(
     fk_id_assunto int not null,
     fk_id_editora int not null,
     fk_id_categoria int not null,
-    fk_id_livro_autor int not null
+    fk_id_livro_autor int
 ) auto_increment = 100;
 
 /* tabela Autor */
@@ -22,7 +22,7 @@ create table if not exists tbl_livro(
 create table if not exists tbl_autor(
 	id_autor bigint auto_increment primary key,
     nome_autor varchar(30) not null,
-    sobreome_autor varchar(80) not null
+    sobrenome_autor varchar(80) not null
 );
 
 /* tabela Editora */
@@ -86,7 +86,104 @@ add constraint fkAutor
 foreign key(fk_id_autor)
 references tbl_autor(id_autor);
 
+# Inserindo dados tbl_editora
 
+insert into tbl_editora(nome_editora) 
+values ('Pearson'), 
+('RELX Gruop'), 
+('ThomsonReuters'), 
+('Bertelsmann');
+
+#select * from tbl_editora;
+
+# Inserindo dados tbl_categoria
+
+insert into tbl_categoria(	
+	nome_categoria
+) values ('Auto-ajuda'),
+('ficção'),
+('historia'),
+('aventura'),
+('ciência');
+
+#select * from tbl_categoria;
+
+# Inserindo dados tbl_assunto
+
+insert into tbl_assunto(
+	assunto_livro
+) values (
+	'guerra de aliegina'
+),
+(
+	'guerra de nações'
+),
+(
+	'depressão'
+),
+( 	
+	'criação do universo'
+);
+
+#select * from tbl_assunto;
+
+# Inserindo dados tbl_autor
+
+insert into tbl_autor(
+	nome_autor,
+    sobrenome_autor
+) values (
+	'Carlos',
+    'Munhoz Silva'
+), (
+	'Rodrigo',
+    'Mario Augusto'
+), (
+	'Sergio',
+    'Duarte de Almeida'
+), (
+	'Mario',
+    'Alberto Ruas'
+);
+
+#select * from tbl_autor;
+
+insert into tbl_livro(
+	ISBN,
+    nome_livro,
+    preco_livro,
+    data_publicacao,
+    fk_id_assunto,
+	numero_paginas,
+    fk_id_editora,
+    fk_id_categoria
+) values (
+	"12312312",
+    "daniel",
+    '10.00',
+    '1900-05-01',
+    1,
+    90,
+    1,
+    1
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+drop database db_MeusLivros;
 #drop table tbl_livro;
 #drop table tbl_autor;
 #drop table tbl_livro_autor;
