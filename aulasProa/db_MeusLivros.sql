@@ -13,8 +13,7 @@ create table if not exists tbl_livro(
     numero_paginas int not null,
     fk_id_assunto int not null,
     fk_id_editora int not null,
-    fk_id_categoria int not null,
-    fk_id_livro_autor int
+    fk_id_categoria int not null
 ) auto_increment = 100;
 
 /* tabela Autor */
@@ -70,11 +69,6 @@ alter table tbl_livro
 add constraint fkCategoria
 foreign key(fk_id_categoria)
 references tbl_categoria(id_categoria);
-
-alter table tbl_livro
-add constraint fkLivroAutor
-foreign key(fk_id_livro_autor)
-references tbl_livro_autor(id_livro_autor);
 
 alter table tbl_livro_autor
 add constraint fklivro
@@ -166,8 +160,39 @@ insert into tbl_livro(
     90,
     1,
     1
+), (
+	"32132132",
+    "A morte do gigante",
+    '60.00',
+    '2010-09-30',
+    2,
+    90,
+    2,
+    2
 );
 
+#select * from tbl_livro;
+
+# tabela liveo e autor
+
+insert into tbl_livro_autor(
+	fk_id_autor,
+    fk_id_livro
+) values (
+	1,
+    100
+), (
+	2,
+    100
+), (
+	3,
+    101
+), (
+	4,
+    101
+);
+
+#select * from tbl_livro_autor;
 
 
 
@@ -176,14 +201,7 @@ insert into tbl_livro(
 
 
 
-
-
-
-
-
-
-
-drop database db_MeusLivros;
+#drop database db_MeusLivros;
 #drop table tbl_livro;
 #drop table tbl_autor;
 #drop table tbl_livro_autor;
