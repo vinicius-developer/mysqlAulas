@@ -195,12 +195,6 @@ insert into tbl_livro_autor(
 #select * from tbl_livro_autor;
 
 
-
-
-
-
-
-
 #drop database db_MeusLivros;
 #drop table tbl_livro;
 #drop table tbl_autor;
