@@ -241,13 +241,278 @@ insert into tbl_disciplinas(
     "Técnicas de Programação"
 ), (
     "Modelagem de Dados"
-);
+), (
+	"Liderança – Atributos e Atribuições"
+), (
+    "Economia e Gestão do Setor Público"
+), (
+    "Processos Organizacionais"
+); 
 
 # select * from tbl_disciplinas;
 
-# tabela 
-    
+# tabela professores 
 
+insert into tbl_professores(
+	nome_professor,
+    sobrenome_professor,
+    cpf_professor,
+    rg_professor,
+    rua_professor,
+    numero_professor,
+    bairro_professor
+) values (
+	'Carlos',
+    'Alberto de Nobrega',
+    '11111111111',
+    '111111111',
+    'Rua Dias de Almeida',
+	123,
+    'Jardim Miriam'
+), (
+	'Mario',
+    'Souza Braga',
+    '22222222222',
+    '222222222',
+    'Rua Giuliana',
+	111,
+    'Cidade Julia'
+), (
+	'Thomas',
+    'Silva Souza Chagas',
+    '33333333333',
+    '333333333',
+    'Rua da Idenpendência',
+	1110,
+    'Pedreira'
+), (
+	'Maria',
+    'Reina de Olivera',
+    '44444444444',
+    '444444444',
+    'Rua da Abolição',
+	1597,
+    'Jardim Fontalis'
+), (
+	'Rosileine',
+    'Chagas de Fatima',
+    '55555555555',
+    '555555555',
+    'Av Cupece',
+	3588,
+    'Centro'
+);
+
+# select * from tbl_professores
+
+# tabela disciplinas professores 
+
+insert into tbl_disciplinas_professores(
+	fk_id_professor,
+    fk_id_disciplina
+) values (
+	1,
+    12
+), (
+	1, 
+    10
+), (
+	1,
+    4
+), (
+	2,
+    9
+), (
+    2,
+    8
+), (
+	3,
+    3
+), (
+	3,
+    2
+), (
+	4,
+    6
+), (
+	4, 
+    1
+), (
+	4,
+    2
+), (
+   5,
+   5
+), (
+   5,
+   7
+), (
+   5,
+   11
+), (
+   1,
+   13
+), (
+   4,
+   14
+), (
+   3,
+   15
+);
+
+select * from tbl_disciplinas_professores;
+#select * from tbl_disciplinas_professores where fk_id_professor=1;
+#select * from tbl_disciplinas_professores where fk_id_professor=2;
+#select * from tbl_disciplinas_professores where fk_id_professor=3;
+#select * from tbl_disciplinas_professores where fk_id_professor=4;
+#select * from tbl_disciplinas_professores where fk_id_professor=5;
+#select count(*) from tbl_disciplinas_professores where fk_id_professor=1;
+#select count(*) from tbl_disciplinas_professores where fk_id_professor=2;
+#select count(*) from tbl_disciplinas_professores where fk_id_professor=3;
+#select count(*) from tbl_disciplinas_professores where fk_id_professor=4;
+#select count(*) from tbl_disciplinas_professores where fk_id_professor=5;
+
+# tabela de departamentos
+
+insert into tbl_departamentos(
+	fk_id_professor_vinculado,
+    nome_departamento
+) values (
+	1,
+    "Daparatmento de Ciência da Computação"
+), (
+	2,
+    "Departamento de Engenharia Cívil"
+), (
+	3,
+    "Departamento de Ciência Arquitetônica"
+), (
+	5, 
+    "Depertamento de Engenharia de Software"
+);
+
+#select * from tbl_departamentos;
+
+# tabela de cursos
+
+insert into tbl_cursos(
+	fk_id_departamento,
+    nome_curso
+) values (
+	1,
+    "Ciência da Computação"
+), (
+	2,
+    "Engenharia Cívil"
+), (
+	3,
+    "Arquitetura"
+), (
+	4,
+	"Engenharia de Software"
+);
+
+# select * from tbl_cursos;
+
+# tabela de grades 
+
+insert into tbl_grades(
+	fk_id_disciplina,
+    fk_id_departamento,
+    obrigatoria
+) values (
+	4,
+    1,
+    'S'
+), (
+	5,
+    1,
+    'N'
+), (
+	6,
+    1,
+    'S'
+), (
+	10,
+    1,
+    'N'
+), (
+	11,
+    1,
+    'S' 
+), (
+	12,
+    1,
+    'S'
+), (
+	9,
+    2,
+    'S'
+), (
+	8,
+    2,
+    'S'
+), (
+	7,
+    2,
+    'S'
+), (
+    2,
+    2,
+	'S'
+), (
+	1,
+    3,
+    'S'
+), (
+	2,
+    3,
+    'S'
+), (
+	3,
+	3,
+    'S'
+), (
+	7,
+    3,
+    'N'
+), (
+	4,
+    4,
+    'S'
+), (
+	6,
+    4,
+    'S'
+), (
+	10,
+    4,
+    'N'
+), (
+	11,
+    4,
+    'S'
+), (
+	12,
+    4,
+    'S'
+);
+
+# select * from tbl_grades;
+# select * from tbl_grades where fk_id_departamento=1
+# select * from tbl_grades where fk_id_departamento=2
+# select * from tbl_grades where fk_id_departamento=3
+# select * from tbl_grades where fk_id_departamento=4
+# select * from tbl_grades where fk_id_departamento=1 and obrigatoria='S';
+# select * from tbl_grades where fk_id_departamento=2 and obrigatoria='S';
+# select * from tbl_grades where fk_id_departamento=3 and obrigatoria='S';
+# select * from tbl_grades where fk_id_departamento=4 and obrigatoria='S';
+# select * from tbl_grades where fk_id_departamento=1 and obrigatoria='N';
+# select * from tbl_grades where fk_id_departamento=2 and obrigatoria='N';
+# select * from tbl_grades where fk_id_departamento=3 and obrigatoria='N';
+# select * from tbl_grades where fk_id_departamento=4 and obrigatoria='N';
+ 
+ 
 # drop database db_faculdade;
 
 
