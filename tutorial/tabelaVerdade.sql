@@ -16,4 +16,7 @@ dois operadores são OR ou AND */
 	Para o operador OR sómente uma das duas precisa ser verdadeiro
     
     Para o operador AND os dois precisam se verdadeiro
+    
+    
+    
 */

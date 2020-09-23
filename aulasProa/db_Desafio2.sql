@@ -121,7 +121,7 @@ insert into Historico(
     FK_COD_TURMA,
     FK_COD_PROF,
     FK_ANO,
-    
+    frequencia,
     nota
 ) values ('2015010101', 'BD', 1, '212131', 2015,100.0, 7.3),
 ('2015010101', 'POO', 1, '192011', 2015,70.0, 8.6),
@@ -164,7 +164,8 @@ and nota < 5.0;
 	fazer select numero de matricula 
  */
  
-select fk_mat, fk_cod_disc from historico
+select fk_mat, fk_cod_disc 
+from historico
 where fk_ano = 2015 and fk_cod_disc = 'POO'
 group by fk_mat;
 
@@ -172,6 +173,10 @@ select fk_mat as mat, round(avg(nota), 2) as media
 from historico 
 where fk_ano = 2015
 group by fk_mat;
+
+select round(avg(nota), 2) as media
+from historico
+where FK_COD_DISC = 'POO';
 
 # exercicio c
 
@@ -185,14 +190,4 @@ having round(avg(nota), 2) > 6;
 
 select count(cidade) 
 from alunos
-where cidade = 'Natal';
- 
-
-
-
-
-
-
-
-
-
+where cidade <> 'Natal';

@@ -199,11 +199,13 @@ where DESCONTO is null;
 
 # exercicio B 
 
-select ID_NF, ID_ITEM, COD_PROD, VALOR_UNIT, round(VALOR_UNIT - (VALOR_UNIT*(DESCONTO/100))) as VALOR_VENDIDO 
+select ID_NF, ID_ITEM, COD_PROD, VALOR_UNIT, 
+round(VALOR_UNIT - (VALOR_UNIT*(DESCONTO/100))) as VALOR_VENDIDO 
 from tbl_desafio
 where DESCONTO is not null;
 
-select ID_NF, ID_ITEM, COD_PROD, VALOR_UNIT, round(VALOR_UNIT - (VALOR_UNIT*(DESCONTO/100)), 2) as VALOR_VENDIDO 
+select ID_NF, ID_ITEM, COD_PROD, VALOR_UNIT, 
+round(VALOR_UNIT - (VALOR_UNIT*(DESCONTO/100)), 2) as VALOR_VENDIDO 
 from tbl_desafio
 where DESCONTO > 0;
 
@@ -289,8 +291,6 @@ from tbl_desafio
 group by COD_PROD;
 
 # exericio l
-
-select * from tbl_desafio;
 
 select ID_NF, sum(QUANTIDADE) 
 from tbl_desafio
