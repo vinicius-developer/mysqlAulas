@@ -286,13 +286,16 @@ group by COD_PROD;
 # exercicio k 
 
 select COD_PROD, min(DESCONTO) as MENOR, 
-max(DESCONTO) as MAIOR, avg(DESCONTO) as MEDIA
+max(DESCONTO) as MAIOR, avg(DESCONTO) as MEDIA,
+count(desconto) as itens
 from tbl_desafio
 group by COD_PROD;
 
 # exericio l
 
-select ID_NF, sum(QUANTIDADE) 
+select ID_NF, count(quantidade) as itens
 from tbl_desafio
-where QUANTIDADE > 3
-group by ID_NF;
+group by ID_NF
+having count(quantidade) > 3;
+
+/* Toda coluna que eu vou usar no group by essa coluna precisa estar no select */

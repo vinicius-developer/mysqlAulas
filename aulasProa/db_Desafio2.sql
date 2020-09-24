@@ -32,7 +32,9 @@ create table if not exists Turma(
     ano year not null,
     horario varchar(07) not null,
     primary key (COD_DISC, COD_TURMA, COD_PROF, ano),
+    
 	constraint fk_id_disciplinas foreign key(COD_DISC) references Disciplinas(COD_DISC),
+    
     constraint fk_id_professor foreign key(COD_PROF) references Professores(COD_PROF)
 );
 
@@ -45,13 +47,18 @@ create table if not exists Historico(
     frequencia float not null,
     nota float not null,
     primary key (FK_MAT, FK_COD_DISC,FK_COD_TURMA,FK_COD_PROF,FK_ANO),
-    constraint fk_mat_historibo foreign key(FK_MAT)
+    
+    constraint fk_mat_historibo 
+    foreign key(FK_MAT)
     references Alunos(MAT),
-    constraint fks_turma_hitorico foreign key(FK_COD_DISC, FK_COD_TURMA, FK_COD_PROF, FK_ANO) 
+    
+    constraint fks_turma_hitorico 
+    foreign key(FK_COD_DISC, FK_COD_TURMA, FK_COD_PROF, FK_ANO) 
     references Turma(COD_DISC, COD_TURMA, COD_PROF, ano)
+
 );
 
-#drop table Historico;
+drop table Historico;
 
 # inserindo dados 
 
@@ -152,7 +159,7 @@ insert into Historico(
 
 # exercicio a
 
-select FK_MAT as MAT 
+select FK_MAT as MAT, nota
 from historico 
 where fk_cod_disc = 'BD' 
 and fk_ano = 2015
@@ -163,20 +170,10 @@ and nota < 5.0;
 /*
 	fazer select numero de matricula 
  */
- 
-select fk_mat, fk_cod_disc 
-from historico
-where fk_ano = 2015 and fk_cod_disc = 'POO'
-group by fk_mat;
-
-select fk_mat as mat, round(avg(nota), 2) as media
-from historico 
-where fk_ano = 2015
-group by fk_mat;
 
 select round(avg(nota), 2) as media
 from historico
-where FK_COD_DISC = 'POO';
+where FK_COD_DISC = 'POO' and fk_ano = '2015' ;
 
 # exercicio c
 
@@ -191,3 +188,11 @@ having round(avg(nota), 2) > 6;
 select count(cidade) 
 from alunos
 where cidade <> 'Natal';
+
+/* 
+comando para mododificar uma coluna da tabela 
+para alterar a chave primária de uma tabela é possível 
+
+alter table tbl_teste drop primary key;
+
+*/
