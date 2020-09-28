@@ -161,6 +161,14 @@ AND ESTADO_DA_EDITORA = "SP"
 OR SEXO_DO_AUTOR = 'M' 
 AND ESTADO_DA_EDITORA = 'RJ';
 
+# Essa é outra forma de fazer o exercíciio
+
+select NOME_DO_AUTOR, SEXO_DO_AUTOR, ESTADO_DA_EDITORA 
+from LIVROS
+where SEXO_DO_AUTOR = 'M' 
+and (ESTADO_DA_EDITORA = 'SP' or ESTADO_DA_EDITORA = 'RJ');
+
+
 select * from LIVROS;
 
 truncate LIVROS;

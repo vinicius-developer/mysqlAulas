@@ -1,4 +1,3 @@
-
 use db_Desafio2;
 
 /* Select em mais de uma tabela*/
@@ -7,7 +6,6 @@ select historico.fk_mat, alunos.nome
 from alunos 
 inner join historico 
 on historico.fk_mat = alunos.mat;
-
 
 select historico.fk_mat as mat, 
 alunos.nome as nome_aluno, 
@@ -90,9 +88,9 @@ on professores.cod_prof = turma.cod_prof
 inner join disciplinas
 on disciplinas.cod_disc = turma.cod_disc;
 
-# Silvia Fiacador]
 
-SELECT brinquedo.nome, operador.nome 
+
+select brinquedo.nome, operador.nome 
 from brinquedo, operador, agenda
 where brinquedo.codbrinq = agenda.codbrinq 
 and operador.codoper = agenda.codoper 
