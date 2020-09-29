@@ -86,15 +86,16 @@ create table if not exists tbl_listas_alunos_turmas(
 	fk_id_turma smallint not null,
     fk_ra_aluno int not null,
     finalizou char(01) not null,
-    aprovado char(01) not null
+    aprovado char(01)
 );
 
 # tabela telefones 
 
 create table if not exists tbl_telefone(
-	fk_id_tipo_pessoa tinyint not null,
-    fk_id_pessoa int not null,
-    telefone_pessoa varchar(11) not null
+	fk_id_tipo_pessoa tinyint,
+    fk_id_pessoa int,
+    telefone_pessoa varchar(11) ,
+    primary key(fk_id_tipo_pessoa, fk_id_pessoa, telefone_pessoa)
 );
 
 # tabela tipo pessoa 
@@ -107,8 +108,9 @@ create table if not exists tbl_tipo_pessoa(
 # tabela disciplinas de professores
 
 create table if not exists tbl_disciplinas_professores(
-	fk_id_professor int not null,
-    fk_id_disciplina smallint not null
+	fk_id_professor int,
+    fk_id_disciplina smallint,
+    primary key(fk_id_professor, fk_id_disciplina)
 );
 
 # criando relacionamentos entre as tabelas 
@@ -360,7 +362,7 @@ insert into tbl_disciplinas_professores(
    15
 );
 
-select * from tbl_disciplinas_professores;
+#select * from tbl_disciplinas_professores order by fk_id_professor;
 #select * from tbl_disciplinas_professores where fk_id_professor=1;
 #select * from tbl_disciplinas_professores where fk_id_professor=2;
 #select * from tbl_disciplinas_professores where fk_id_professor=3;
@@ -498,7 +500,7 @@ insert into tbl_grades(
     'S'
 );
 
-# select * from tbl_grades;
+# select * from tbl_grades order by fk_id_departamento;
 # select * from tbl_grades where fk_id_departamento=1
 # select * from tbl_grades where fk_id_departamento=2
 # select * from tbl_grades where fk_id_departamento=3
@@ -511,9 +513,621 @@ insert into tbl_grades(
 # select * from tbl_grades where fk_id_departamento=2 and obrigatoria='N';
 # select * from tbl_grades where fk_id_departamento=3 and obrigatoria='N';
 # select * from tbl_grades where fk_id_departamento=4 and obrigatoria='N';
- 
- 
-# drop database db_faculdade;
+
+# tabela alunos
+
+insert into tbl_alunos(
+    nome_aluno,
+    sobrenome_aluno,
+    cpf_aluno,
+    rg_aluno,
+    fk_id_curso,
+    rua_aluno,
+    numero_aluno,
+    bairro_aluno,
+    ativo
+) values (
+	"Mario",
+    "Cunha de Souza",
+    "11111111111",
+    "111111111",
+    4,
+    "Rua Dias de Almeida",
+    251,
+	"Cidade Julia",
+    'S'
+), (
+	"Roberto",
+    "Armando Rodrigues",
+    "22222222222",
+    "222222222",
+    4,
+    "Rua Giuliana",
+    456,
+	"Jardim Miriam",
+	'S'
+), (
+	"Carlos",
+    "Tigas de Souza",
+    "33333333333",
+    "333333333",
+    4,
+    "Rua Celso Couto",
+    555,
+    "Pedreira",
+    'N'
+), (
+	"Thiago",
+    "Roberto Marinha Dias",
+    "44444444444",
+    "444444444",
+    4,
+    "Rua Agusta",
+    6984,
+    "Centro",
+    'N'
+), (
+	"Caio",
+    "Amorim Filho",
+	"55555555555",
+    "555555555",
+    3,
+    "Rua Rego Freitas",
+    659,
+    "Macaé",
+    "S"
+), (
+	"Segio",
+    "dos Santos Dias",
+	"66666666666",
+    "666666666",
+    3,
+    "Rua Rego Freitas",
+    753,
+    "Macaé",
+    "S"
+), (
+	"Caio",
+    "Amorim Filho",
+	"77777777777",
+    "777777777",
+    3,
+    "Aveina Cristianini",
+    1069,
+    "Jardim Miriam",
+    "N"
+), (
+	"Mario",
+    "Buarque de Paula",
+	"88888888888",
+    "888888888",
+    3,
+    "Rua Pascoal Valva",
+    146,
+    "Cidade Julia",
+    "N"
+), (
+	"Douglas",
+    "Da Silva Simões",
+	"99999999999",
+    "999999999",
+    2,
+    "Avenida Brigadeiro Henrique Pesssoa",
+    3098,
+    "Vila Zilda",
+    "S"
+), (
+	"Maurício",
+    "Dias de Nobrega",
+	"21111111111",
+    "211111111",
+    2,
+    "Rua Fernando Henrique Cardoso",
+    111,
+    "Nova Galvão",
+    "S"
+), (
+	"Samuel",
+    "Simões de Paula",
+	"12222222222",
+    "122222222",
+    2,
+    "Avinida Cupecê",
+    2114,
+    "Jardim Miriam",
+    "N"
+), (
+	"Mario",
+    "Silva Dias",
+	"23333333333",
+    "233333333",
+    2,
+    "Rua Barão de Maua",
+    556,
+    "Centro",
+    "N"
+), (
+	"Rodrigo",
+    "Silva Lima",
+	"24444444444",
+    "244444444",
+    1,
+    "Rua da Bica",
+    11,
+    "Cidade Julia",
+    "S"
+), (
+	"Aldalberto",
+    "Caxias de Amorin",
+	"26666666666",
+    "266666666",
+    1,
+    "Rua Humberto Eco",
+    951,
+    "Poá",
+    "S"
+), (
+	"Bruno",
+    "Rodrigues Relva",
+	"27777777777",
+    "277777777",
+    1,
+    "Rua Roberto Marinho",
+    7984,
+    "Morumbi",
+    "N"
+), (
+	"Alisson",
+    "Galdino Weld",
+	"28888888888",
+    "288888888",
+    1,
+    "Avenida Morumbi",
+    4985,
+    "Morumbi",
+    "N"
+);
+
+#select * from tbl_alunos;
+#select * from tbl_alunos where ativo='S';
+#select * from tbl_alunos where ativo='N';
+#select * from tbl_alunos where fk_id_curso='1';
+#select * from tbl_alunos where fk_id_curso='2';
+#select * from tbl_alunos where fk_id_curso='3';
+#select * from tbl_alunos where fk_id_curso='4';
+
+
+# tabelas de turmas 
+
+insert into tbl_turmas(
+	fk_id_professor,
+	fk_id_disciplina
+) values (4,1), 
+(3,2), 
+(3,3), 
+(1,4), 
+(5,5), 
+(4,6),
+(5,7),
+(2,8),
+(2,9),
+(1,10),
+(5,11),
+(1,12),
+(1,13),
+(4,14),
+(3,15);
+
+# select * from tbl_turmas;
+
+insert into tbl_listas_alunos_turmas(
+	fk_id_turma,
+    fK_ra_aluno,
+    finalizou,
+    aprovado
+) values (
+	12,
+    1,
+    'N',
+	null
+), (
+	12,
+    2,
+    'N',
+	null
+), (
+	12,
+    3,
+    'S',
+	'S'
+), (
+	11,
+    1,
+    'N',
+    null
+), (
+	11,
+    2,
+    'N',
+    null
+), (
+	11,
+    3,
+	'S',
+    'S'
+), (
+	10,
+    1,
+    'N',
+    null
+), (
+	10,
+	2,
+	'N',
+    null
+), (
+	6,
+    1,
+    'N',
+    null
+), (
+	6,
+    2,
+    'N',
+    null
+), (
+	6,
+    3,
+    'S',
+    'S'
+), (
+	4,
+    1,
+    'N',
+    null
+), (
+	4,
+    2,
+    'N',
+    null
+), (
+	4,
+    3,
+    'S',
+    'S'
+), (
+	7,
+    5,
+    'N',
+    null
+), (
+	7,
+    6,
+	'N',
+    null
+), (
+	3,
+    5,
+    'N',
+    null
+), (
+	3,
+    6,
+    'N',
+    null
+), (
+	3,
+    7,
+    'S',
+    'S'
+), (
+	2,
+    5,
+    'N',
+    null
+), (
+	2,
+    6,
+    'N',
+    null
+), (
+	2,
+    7,
+    'S',
+    'S'
+), (
+	1,
+    5,
+    'N',
+    null
+), (
+	1,
+    6,
+    'N',
+    null
+), (
+	1,
+    7,
+    'S',
+    'S'
+), (
+	2,
+    9,
+    'N',
+	null
+), (
+	2,
+    10,
+    'N',
+    null
+), (
+	2,
+    11,
+    'S',
+    'S'
+), (
+	7,
+    9,
+    'N',
+    null
+), (
+	7,
+    10,
+	'N',
+    null
+), (
+	7,
+    11,
+    'S',
+    'S'
+), (
+	8,
+    9,
+    'N',
+    null
+), (
+	8,
+    10,
+    'N',
+    null
+), (
+	8,
+    11,
+    'S',
+    'S'
+), (
+	9,
+    9,
+    'N',
+    null
+), (
+	9,
+    10,
+    'N',
+    null
+), (
+	9,
+    11,
+    'S',
+    'S'
+), (
+	12,
+    13,
+    'N',
+    null
+), (
+	12,
+    14,
+    'N',
+    null
+), (
+	12,
+    15,
+    'S',
+    'S'
+), (
+	11,
+    13,
+	'N',
+    null
+), (
+	11,
+    14,
+    'N',
+    null
+), (
+	11,
+    15,
+    'S',
+    'S'
+), (
+	10,
+    13,
+    'N',
+    null
+), (
+	10,
+    14,
+    'N',
+    null
+), (
+	6,
+    13,
+	'N',
+    null
+), (
+	6,
+    14,
+    'N',
+    null
+), (
+	6,
+    15,
+    'S',
+    'S'
+), (
+	5,
+    13,
+    'N',
+    null
+), (
+	5,	
+    14,
+    'N',
+    null
+), (
+	4,
+    13,
+    'N',
+    null
+), (
+	4,
+    14,
+    'N',
+    null
+), (
+	4,
+    15,
+    'S',
+    'S'
+);
+
+# select * from tbl_listas_alunos_turmas;
+
+# tabela de registros escolares
+
+insert into tbl_registros_escolares(
+	fk_ra_aluno,
+    fk_id_disciplina_cursada_aluno,
+    nota_final_aluno,
+    frequencia_aluno,
+    data_inicio_disciplina,
+    data_fim_disciplina
+) values (
+	3,
+    12,
+    8.5,
+    70.0,
+	'2019-05-26',
+	'2019-12-26'
+), (
+	3,
+    11,
+    7.2,
+    80.0,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	3,
+    6,
+    8.1,
+    90.0,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	3,
+    4,
+    7.5,
+    100.0,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	7,
+    3,
+    9.0,
+    70.0,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	7,
+    2,
+    9.5,
+    96.0,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	7,
+    1,
+    8.1,
+    68.50,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	11,
+    8,
+    9.9,
+    76.35,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	11,
+    2,
+    7.6,
+    89.6,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	11,
+    7,
+    8.5,
+    100.0,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	11,
+    9,
+    9.0,
+    95.0,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	15,
+    12,
+    7.6,
+    70.0,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	15,
+    11,
+    9.8,
+    78.0,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	15,
+    6,
+    8.0,
+    100.0,
+	'2019-05-26',
+    '2019-12-26'
+), (
+	15,
+    4,
+    8.2,
+    90.0,
+	'2019-05-26',
+    '2019-12-26'
+);
+
+truncate tbl_registros_escolares;
+
+
+/* 
+
+
+
+
+/*
+select tbl_cursos.nome_curso, 
+tbl_departamentos.id_departamento
+from tbl_cursos
+inner join tbl_departamentos
+on tbl_departamentos.id_departamento=tbl_cursos.id_curso;
+*/
+
+#drop database db_faculdade;
+
 
 
 
