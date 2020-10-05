@@ -89,20 +89,22 @@ create table if not exists tbl_listas_alunos_turmas(
     aprovado char(01)
 );
 
-# tabela telefones 
+# tabela telefones de professores
 
-create table if not exists tbl_telefone(
-	fk_id_tipo_pessoa tinyint,
-    fk_id_pessoa int,
-    telefone_pessoa varchar(11) ,
-    primary key(fk_id_tipo_pessoa, fk_id_pessoa, telefone_pessoa)
+create table if not exists tbl_telefone_professores(
+    fk_id_professor int,
+    telefone varchar(11) ,
+    ativo enum('S', 'N') not null,
+    primary key(fk_id_professor, telefone)
 );
 
-# tabela tipo pessoa 
+# tabela telefones de alunos
 
-create table if not exists tbl_tipo_pessoa(
-	id_tipo_pessoa tinyint auto_increment primary key,
-    nome_tipo_pessoa varchar(30) not null
+create table if not exists tbl_telefone_alunos(
+    fk_id_aluno int,
+    telefone varchar(11),
+	ativo enum('S', 'N') not null,
+    primary key(fk_id_aluno, telefone)
 );
 
 # tabela disciplinas de professores
@@ -196,22 +198,19 @@ add constraint rel_fk_id_disciplina_registros_escolares
 foreign key(fk_id_disciplina_cursada_aluno)
 references tbl_disciplinas(id_disciplina);
 
-# relacionamentos tabela telefones para outras tabelas
+# relacionamentos tabela telefones alunos para outras tabelas
 
-alter table tbl_telefone
+alter table tbl_telefone_alunos
 add constraint rel_fk_id_pessoa_alunos_tbl_telefone
-foreign key(fk_id_pessoa)
+foreign key(fk_id_aluno)
 references tbl_alunos(ra_aluno);
 
-alter table tbl_telefone
-add constraint rel_fk_id_professores_tbl_telefone
-foreign key(fk_id_pessoa)
-references tbl_professores(id_professor);
+# relacionamentos tabela telefones professores para outras tabelas
 
-alter table tbl_telefone
-add constraint rel_fk_id_tipo_pessoa_tbl_telefone
-foreign key(fk_id_tipo_pessoa)
-references tbl_tipo_pessoa(id_tipo_pessoa);
+alter table tbl_telefone_professores
+add constraint rel_fk_id_professores_tbl_telefone
+foreign key(fk_id_professor)
+references tbl_professores(id_professor);
 
 # inserindo dados dentro da tabela
 
@@ -1110,13 +1109,69 @@ insert into tbl_registros_escolares(
     '2019-12-26'
 );
 
-truncate tbl_registros_escolares;
+insert into tbl_telefone_alunos(
+    fk_id_aluno,
+    telefone,
+    ativo
+) values (
+    1,
+    '11911111111',
+    'S'
+), (
+    1,
+    '1111111111',
+    'N'
+), (
+    2,
+    '1122222222',
+    'S'
+), (
+    3,
+    '1133333333',
+    'S'
+), (
+    3,
+    '11933333333',
+	'S'
+), (
+    5,
+    '11988888888',
+    'S'
+), (
+    5,
+    '1188888888',
+    'N'
+);
 
-
-/* 
-
-
-
+insert into tbl_telefone_professores (
+    fk_id_professor,
+    telefone,
+    ativo
+) values (
+    1,
+    '11911111111',
+    'S'
+), (
+    3,
+    '1193333333',
+    'S'
+), (
+    3,
+    '1133333333',
+    'N'
+), (
+    4,
+    '11944444444',
+    'S'
+), (
+	5,
+    '1155555555',
+    'N'
+), (
+	5,
+    '11955555555',
+    'S'
+);
 
 /*
 select tbl_cursos.nome_curso, 
@@ -1127,6 +1182,7 @@ on tbl_departamentos.id_departamento=tbl_cursos.id_curso;
 */
 
 #drop database db_faculdade;
+
 
 
 
